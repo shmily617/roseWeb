@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RoseToMe</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <!-- <link rel="stylesheet" href="./css/styles.css"> -->
+    <!-- <link rel="stylesheet" href="./css/greetings.css"> -->
+    <!-- <script src="./jquery-1.10.2.js"></script> -->
+    <!-- <script src="./socketio.js"></script> -->
+    <!-- <script src="./client_flowers.js"></script> -->
+    <!-- <script src="./js/vCode.js"></script> -->
+    <!-- <script src="./js/main.js"></script> -->
+    <style>
+     .title {
+        position: relative;
+        margin: 40px auto;
+        border-radius: 50%;
+        background-color: #d9d9d9;
+        height: 100px;
+        width: 100px;
+    }
+    .title:before {
+    position: absolute;
+    content: "RoseToMe";
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: 100px;
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+}
+    .greeting-area {
+    display: block;
+    width: 90%;
+    height: 250px;
+    margin: 0 auto;
+    font-size: 15px;
+    color: #555;
+    background-color: #fff;
+    opacity: 0.85;
+}
+.greeting-text {
+    font-size: 16px;
+    padding: 3px;
+    width: 95%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.greeting-from {
+    font-size: 16px;
+    padding: 3px;
+    width: 95%;
+    text-align: left;
+    font-style: italic;
+    font-weight: bold;
+}
+.greeting-to {
+    font-size: 16px;
+    padding: 5px;
+    width: 95%;
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 5px;
+}
+    </style>
+ </head>
+<body class="bg">
+  <div style="margin-top:30px;">
+    <div class="title"></div>    
+    <div class="greeting-area">
+        <div class="greeting-text greeting-from" id="receiver_receive"></div>
+        <div class="greeting-text" id="content_receive"></div>
+        <div class="greeting-text greeting-to" id="sender_receive"></div>
+    </div> 
+  </div> 
+</body>
+<script type="text/javascript">
+  var message = localStorage.getItem('message');
+  document.getElementById("receiver_receive").innerText = localStorage.getItem('head');
+  document.getElementById("content_receive").innerText = localStorage.getItem('content');
+  document.getElementById("sender_receive").innerText = localStorage.getItem('name');
+</script>
+</html>

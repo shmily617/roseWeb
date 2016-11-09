@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RoseToMe</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/mui.css">
+    <script src="js/mui.min.js"></script>
+    <script src="./js/vCode.js"></script>
+    <script src="javascripts/socketio.js"></script>
+    <script src="javascripts/client_flowers.js"></script>
+    <!-- <script src="./js/main.js"></script> -->
+    <style>
+      .greeting-title {
+          height: 30px;
+          line-height: 30px;
+          width: 90%;
+          margin: 0px auto;
+          color: #fff;
+          font-size: 15px;
+          text-align: center;
+          font-weight: bold;
+          background-color: #555;
+      }
+      .greeting-content {
+          display: block;
+          width: 90%;
+          height: 290px;
+          margin: 0 auto;
+          font-size: 15px;
+          color: #555;
+          /* border: 1px solid #ccc; */
+          overflow-x: hidden;
+          overflow-y: auto;
+          background-color: #fff;
+          opacity: 0.85;
+      }
+      .receiver {
+    position: relative;
+    margin: 5px 10px;
+    text-align: left;
+    color: #555;
+    height: 35px;
+    line-height: 40px;
+    padding-left: 10px;
+}
+
+.receiver input {
+    margin: 0px;
+    width: 75%;
+    font-size: 16px;
+    height: 100%;
+    line-height: 21px;
+    border: 0px;
+    outline: mediumaquamarine;
+}
+.greeting-content textarea {
+    position: relative;
+    width: 99%;
+    height: 170px;
+    font-size: 16px;
+    border: 0px;
+    padding: 5px 10px;
+    outline: mediumaquamarine;
+}
+.sender {
+    position: relative;
+    margin: 5px 10px;
+    text-align: right;
+    color: #555;
+    height: 35px;
+    line-height: 40px;
+}
+
+.sender input {
+    font-size: 16px;
+    height: 100%;
+    margin: 0px;
+    line-height: 21px;
+    width: 30%;
+    border: 0px;
+    outline: mediumaquamarine;
+}
+.btn-con {
+    width: 90%;
+    height: 32px;
+    /* position: relative; */
+    margin: 15px auto;
+}
+.vcode {
+    width: 35%;
+    height: 30px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    float: left;
+    /* margin: 0 12%; */
+}
+.vcode_text {
+    font-size: 16px;
+    width: 35%;
+    float: right;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 0 1px;
+    outline: mediumaquamarine;
+}
+.cancel {
+    width: 47%;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 16px;
+    background-color: #555;
+    text-align: center;
+    border-radius: 2px;
+    float: right;
+}
+.save {
+    width: 47%;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 16px;
+    background-color: #555;
+    text-align: center;
+    border-radius: 2px;
+    float: left;
+}
+.bg {
+  background: url(./img/bg.jpg);
+  background-size: 100%;
+
+}
+.infoArea {
+  width: 90%;
+  margin: 0 auto;
+}
+</style>
+ </head>
+<body class="bg">
+  <div style="margin-top:30px;">
+      
+  
+    <div class="greeting-title">祝福语</div>
+    <div class="greeting-content">
+        <div class="receiver">
+            收礼人：
+            <input type="text" id="receiver">
+        </div>
+        <textarea name="greetings" id="content" cols="40" rows="10"></textarea>
+        <div class="sender">
+            送礼人：
+            <input type="text" id="sender">
+        </div>
+        
+    </div>
+    <div class="infoArea">
+      <form class="mui-input-group">
+        <div class="mui-input-row" style="height: 35px;">
+            <label style="font-size: 13px;">订单平台：</label>
+            <input type="text" class="mui-input-clear" placeholder="请输入订单平台" id="platformInput">
+        </div>
+        <div class="mui-input-row" style="height: 35px;">
+            <label style="font-size: 13px;">订单号：</label>
+            <input type="text" class="mui-input-clear" placeholder="请输入订单号" id="orderInput">
+        </div>
+        <div class="mui-input-row" style="height: 35px;">
+            <label style="font-size: 12px;">查看留言手机号：</label>
+            <input type="text" class="mui-input-clear" placeholder="请输入手机号" id="telInput">
+        </div>      
+      </form>
+    </div>
+    <div class="btn-con">
+        <div id="vCode1" class="vcode"></div>
+        <input type="text" id="code1" class="vcode_text" style="width: 35%;height: 35px;margin-bottom: 0px" />
+    </div>
+    <div class="btn-con">
+        <div class="cancel" id="cancel" onclick="back()">取消</div>
+        <div class="save" id="save" onclick="save()">保存</div>
+    </div>
+   </div> 
+</body>
+<script type="text/javascript">
+  var container1 = document.getElementById("vCode1");
+  var code1 = new vCode(container1);
+  function back() {
+    window.location.href = '/';
+  }
+  function save() {
+    if ( !code1.verify(document.getElementById("code1").value)) {
+      alert('请输入正确的验证码！');
+    } else {
+      var phone = document.getElementById('telInput').value;
+      var orderId = document.getElementById('orderInput').value;
+      var platform =  document.getElementById('platformInput').value;
+      var receiver = document.getElementById('receiver').value;
+      var content = document.getElementById('content').value;
+      var sender = document.getElementById('sender').value;
+      createWish(platform, orderId, phone, receiver, content, sender, 'RoseToMe', new function() {
+        this.successCallback = function(message) {
+          // console.log("succeed" + JSON.stringify(message));
+          window.location.href = '/success';
+        };
+        this.errorCallback = function(message) {
+          console.log("failed" + message);
+        };
+        this.connectCallback = function(message) {
+          console.log('connectSucceed' + message);
+        };
+        this.disconnectCallback = function(message) {
+          console.log('disconnect' + message);
+        };
+        this.socketErrorCallback = function(message) {
+          console.log('socketError' + message);
+        };
+        this.newMessageCallback = function(message) {
+          console.log('newMessages' + message);
+        };
+      });
+    }
+  }
+</script>
+</html>
