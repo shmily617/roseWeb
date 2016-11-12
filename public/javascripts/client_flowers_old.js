@@ -1,7 +1,7 @@
 /**
 * client API
 * @Auther: zgwang
-* @Date: 2016.11.3
+* @Date: 2016.11.11
 */
 
 // var io = require('socket.io-client');
@@ -19,7 +19,7 @@ client['loginMessage'] = loginMessage;
 client['registerMessage'] = registerMessage;
 client['identityMessage'] = identityMessage;
 client['updateMessage'] = updateMessage;
-client['readWishBySetPhone'] = readWishBySetPhone;
+
 // connect method
 function connect(callback){ 
 	// ip and port, you should change the ip address by yourself.
@@ -43,7 +43,7 @@ function connect(callback){
 /**
  * This function is used to create a wish.
  */
-function createWish(plateform, orderId, phone, setPhone, head, content, name, 
+function createWish(plateform, orderId, phone, head, content, name, 
 	flowerShop, callback){
 	connect(callback);
 
@@ -56,7 +56,6 @@ function createWish(plateform, orderId, phone, setPhone, head, content, name,
 
 	var obj = {};
 	obj.phone = phone;
-	obj.setPhone = setPhone;
 	obj.wishes = [wish];
 	obj.flowerShop = flowerShop; 
 
@@ -89,24 +88,6 @@ function readWish(phone, flowerShop, callback){
 	});
 }
 
-/**
-* This function is used to read a wish by setPhone.
-*/
-function readWishBySetPhone(setPhone, flowerShop, callback){
-	connect(callback);
-
-	var obj = {};
-	obj.setPhone = setPhone;
-	obj.flowerShop = flowerShop;
-	socket.emit("readWishBySetPhone", obj);
-
-	socket.on('readWishBySetPhoneSucceed', function(object){
-		callback.successCallback(object);
-	});
-	socket.on('readWishBySetPhoneFailed', function(object){
-		callback.errorCallback(object);
-	});
-}
 /**
 * This function is used to create a user.
 */

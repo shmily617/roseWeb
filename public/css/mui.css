@@ -4152,9 +4152,9 @@ select:focus {
 
 .mui-navigate-right:after,
 .mui-push-right:after {
-    right: 15px;
+    /*right: 15px;*/
 
-    content: '\e583';
+    /*content: '\e583';*/
 }
 
 .mui-pull-top-pocket, .mui-pull-bottom-pocket {

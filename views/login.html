@@ -91,7 +91,7 @@
     login(telInput, passInput, new function(){
       this.successCallback = function(message) {
         // console.log("succeed" + message);
-        // localStorage.setItem('phone', telInput);
+        localStorage.setItem('loginPhone', telInput);
         window.location.href = "/main";
         hideLoading();
       };
