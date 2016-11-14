@@ -238,6 +238,10 @@
           </tr>
         </thead>
         <tbody class="tableBody" id="commentArea">
+        <tr onclick="alert('11')">
+          <td>ddd</td>
+          <td>ddd</td>
+        </tr>
         </tbody>
       </table>
       <div class="footer">
@@ -327,7 +331,7 @@
 <script type="text/javascript">
   var templateComment = ["<tr>",
 " <td>{{date}}</td>",
-" <td>{{plateform}}</td>",
+" <td>{{getPhone}}</td>",
 " <td>{{orderId}}</td>",
 " <td>{{name}}</td>",
 "</tr>"].join("");
@@ -343,10 +347,10 @@
   function handleSearch(data) {
     var fragment = '';
     // console.log("=>>====",data);
-    if (data == "") {
-      console.log("=>>",data);
+    if (data !== "") {
+      // console.log("=>>",data);
       // readWish("18810802046", "yuanqi", new function(){
-      readWish(localStorage.getItem('loginPhone'), "RoseToMe", new function(){ 
+      readWish(data, "RoseToMe", new function(){ 
         this.successCallback = function(message) {
           // localStorage.setItem('lmj',message);
           // console.log("succeed", message);
@@ -378,7 +382,7 @@
         };
       });
     } else {
-      readWishBySetPhone(data, "RoseToMe", new function(){
+      readWishBySetPhone(localStorage.getItem('loginPhone'), "RoseToMe", new function(){
         this.successCallback = function(message) {
           for (var i = 0, length = message.length; i < length; i++) {
             fragment += Mustache.render(templateComment, message[i]);

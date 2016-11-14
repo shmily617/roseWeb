@@ -53,6 +53,7 @@ function createWish(plateform, orderId, phone, setPhone, head, content, name,
 	wish.head = head;
 	wish.content = content;
 	wish.name = name;
+	wish.getPhone = phone;
 
 	var obj = {};
 	obj.phone = phone;
