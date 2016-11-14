@@ -104,10 +104,14 @@
     register(telInput, passInput, new function(){
       this.successCallback = function(message) {
         console.log("succeed" + message);
+        hideLoading();
+        mui.alert("注册成功！");
         window.location.href = "/login";
       };
       this.errorCallback = function(message) {
         console.log("failed" + message);
+        hideLoading();
+        mui.alert("该手机号已注册！");
       };
       this.connectCallback = function(message) {
         console.log('connectSucceed' + message);
