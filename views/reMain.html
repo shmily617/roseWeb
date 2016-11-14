@@ -6,35 +6,13 @@
     <title>RoseToMe</title>
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <!-- <link rel="stylesheet" href="./css/styles.css"> -->
-    <!-- <link rel="stylesheet" href="./css/greetings.css"> -->
-    <!-- <script src="./jquery-1.10.2.js"></script> -->
-    <!-- <script src="./socketio.js"></script> -->
-    <!-- <script src="./client_flowers.js"></script> -->
-    <!-- <script src="./js/vCode.js"></script> -->
-    <!-- <script src="./js/main.js"></script> -->
+    <link rel="stylesheet" href="css/mui.css">
     <style>
      .title {
-        position: relative;
-        margin: 40px auto;
         border-radius: 50%;
         background-color: #fff;
         opacity: 0.8;
-        height: 100px;
-        width: 100px;
     }
-    .title:before {
-    position: absolute;
-    content: "RoseToMe";
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    line-height: 100px;
-    color: #b97b7b;
-    font-size: 17px;
-    text-align: center;
-}
     .greeting-area {
     display: block;
     width: 82%;
@@ -75,17 +53,48 @@
   background-size: 100%;
 
 }
+.header {
+        margin: 10% 0;
+        width: 100%;
+        height: 100px;
+        padding: 5px;
+        text-align: center;
+      }
+/*      .footer {
+    width: 90%;
+    margin: 120px auto 10px auto;
+    white-space: normal;
+    text-align: center;
+    font-size: 12px;
+    background-color: rgba(255,255,255,0.8);
+}*/
+.footer {
+        width: 80%;
+        margin: 0px 10%;
+        white-space: normal; 
+        text-align: center;
+        font-size: 12px;
+        position: absolute;
+        bottom: 0px;
+        background-color: rgba(255,255,255,0.9);
+      }
     </style>
  </head>
 <body class="bg">
   <div style="margin-top:30px;">
-    <div class="title"></div>    
+    <div class="header">
+        <img src="img/logo.png" class="title">
+    </div>
     <div class="greeting-area">
         <div class="greeting-text greeting-from" id="receiver_receive"></div>
         <div class="greeting-text" id="content_receive"></div>
         <div class="greeting-text greeting-to" id="sender_receive"></div>
     </div> 
   </div> 
+  <div class="footer">
+      <a href="tel:4001-510-521"><p style="margin: 0px"><span class="mui-icon mui-icon-phone" style="font-size: 20px"></span>4001-510-521</p></a>
+      <p style="margin: 0px">甄选世界顶级玫瑰，只为最深爱意表达</p>
+  </div>
 </body>
 <script type="text/javascript">
   var message = localStorage.getItem('message');
