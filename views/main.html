@@ -345,7 +345,8 @@
     // console.log("=>>====",data);
     if (data == "") {
       console.log("=>>",data);
-      readWish("18810802046", "yuanqi", new function(){
+      // readWish("18810802046", "yuanqi", new function(){
+      readWish(localStorage.getItem('loginPhone'), "RoseToMe", new function(){ 
         this.successCallback = function(message) {
           // localStorage.setItem('lmj',message);
           // console.log("succeed", message);
@@ -377,7 +378,7 @@
         };
       });
     } else {
-      readWishBySetPhone("13522685887", "yuanqi", new function(){
+      readWishBySetPhone(data, "RoseToMe", new function(){
         this.successCallback = function(message) {
           for (var i = 0, length = message.length; i < length; i++) {
             fragment += Mustache.render(templateComment, message[i]);
