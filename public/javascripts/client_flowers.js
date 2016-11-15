@@ -54,6 +54,7 @@ function createWish(plateform, orderId, phone, setPhone, head, content, name,
 	wish.content = content;
 	wish.name = name;
 	wish.getPhone = phone;
+	wish.order = "0";
 
 	var obj = {};
 	obj.phone = phone;
@@ -82,8 +83,13 @@ function readWish(phone, flowerShop, callback){
 	obj.flowerShop = flowerShop;
 	socket.emit("readWish", obj);
 
-	socket.on('readWishSucceed', function(object){
+	socket.on('readWishSucceed', function(object){		
+		for(var i = 0; i < object.length; i++){
+			object[i].date = object[i].date.substring(0, 10);
+			object[i].order = i + "";
+		}
 		callback.successCallback(object);
+		
 	});
 	socket.on('readWishFailed', function(object){
 		callback.errorCallback(object);
@@ -102,6 +108,10 @@ function readWishBySetPhone(setPhone, flowerShop, callback){
 	socket.emit("readWishBySetPhone", obj);
 
 	socket.on('readWishBySetPhoneSucceed', function(object){
+		for(var i = 0; i < object.length; i++){
+			object[i].date = object[i].date.substring(0, 10);
+			object[i].order = i + "";
+		}
 		callback.successCallback(object);
 	});
 	socket.on('readWishBySetPhoneFailed', function(object){

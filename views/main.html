@@ -238,10 +238,6 @@
           </tr>
         </thead>
         <tbody class="tableBody" id="commentArea">
-        <tr onclick="alert('11')">
-          <td>ddd</td>
-          <td>ddd</td>
-        </tr>
         </tbody>
       </table>
       <div class="footer">
@@ -329,7 +325,20 @@
   }
 </script>
 <script type="text/javascript">
-  var templateComment = ["<tr>",
+var temp;
+  function goto(i) {
+    // alert(JSON.stringify(i));
+    // console.log(JSON.stringify(this));
+    // console.log(i);
+    // console.log(temp[i]);
+    document.getElementById('receiver').value = temp[i].head;
+    document.getElementById('content').value = temp[i].content;
+    document.getElementById('sender').value = temp[i].name;
+    document.getElementById('platformInput').value = temp[i].plateform;
+    document.getElementById('orderInput').value = temp[i].orderId;
+    document.getElementById('telInput').value = temp[i].getPhone;
+  }
+  var templateComment = ["<tr onclick=\"goto({{order}})\">",
 " <td>{{date}}</td>",
 " <td>{{getPhone}}</td>",
 " <td>{{orderId}}</td>",
@@ -352,6 +361,7 @@
       // readWish("18810802046", "yuanqi", new function(){
       readWish(data, "RoseToMe", new function(){ 
         this.successCallback = function(message) {
+          temp = message;
           // localStorage.setItem('lmj',message);
           // console.log("succeed", message);
           // var allData = JSON.stringify(message);
@@ -384,6 +394,7 @@
     } else {
       readWishBySetPhone(localStorage.getItem('loginPhone'), "RoseToMe", new function(){
         this.successCallback = function(message) {
+          temp = message;
           for (var i = 0, length = message.length; i < length; i++) {
             fragment += Mustache.render(templateComment, message[i]);
             // console.log(fragment);
