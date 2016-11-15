@@ -256,7 +256,7 @@
   }
   function save() {
     if ( !code1.verify(document.getElementById("code1").value)) {
-      alert('请输入正确的验证码！');
+      mui.toast('请输入正确的验证码！');
     } else {
       var loginPhone = localStorage.getItem('loginPhone');
       var phone = document.getElementById('telInput').value;
