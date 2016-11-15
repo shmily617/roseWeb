@@ -104,6 +104,7 @@
           document.getElementById('identify').onclick = null;
           identifyCode = message;
           mui.toast("验证码已发送，请注意查收！")
+          console.log(message);
         };
         this.errorCallback = function(message) {
           console.log("failed" + message);
