@@ -23,3 +23,8 @@ gulp.task('scripts', function() {
         .pipe(uglify())
         .pipe(gulp.dest('lmj/public/javascripts'));
 });
+gulp.task('zgw', function() {
+    gulp.src('wzg/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('wzg/data'));
+});
