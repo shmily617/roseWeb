@@ -357,23 +357,14 @@ var temp;
   
   function handleSearch(data) {
     var fragment = '';
-    // console.log("=>>====",data);
+
     if (data !== "") {
-      // console.log("=>>",data);
-      // readWish("18810802046", "yuanqi", new function(){
-      readWish(data, "RoseToMe", new function(){ 
+      readWishBySetPhone(localStorage.getItem('loginPhone'), data, "RoseToMe", new function(){
+      // readWish(data, "RoseToMe", new function(){ 
         this.successCallback = function(message) {
           temp = message;
-          // localStorage.setItem('lmj',message);
-          // console.log("succeed", message);
-          // var allData = JSON.stringify(message);
-          // console.log('----->',message.length);
-          // console.log(message[0].head);
-          // console.log(fragment);
           for (var i = 0, length = message.length; i < length; i++) {
-            fragment += Mustache.render(templateComment, message[i]);
-            // console.log(fragment);
-            // document.getElementById("commentArea").innerHTML += fragment;
+            fragment += Mustache.render(templateComment, message[i]);;
           }
           document.getElementById("commentArea").innerHTML = fragment;
         };
@@ -394,7 +385,7 @@ var temp;
         };
       });
     } else {
-      readWishBySetPhone(localStorage.getItem('loginPhone'), "RoseToMe", new function(){
+      readWishBySetPhone(localStorage.getItem('loginPhone'), null, "RoseToMe", new function(){
         this.successCallback = function(message) {
           temp = message;
           for (var i = 0, length = message.length; i < length; i++) {

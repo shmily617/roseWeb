@@ -13,13 +13,13 @@ gulp.task('testHtmlmin', function() {
         minifyJS: true, //压缩页面JS
         minifyCSS: true //压缩页面CSS
     };
-    gulp.src('views/*.html')
+    gulp.src('views/bak/*.html')
         .pipe(htmlmin(options))
-        .pipe(gulp.dest('dist/views'));
+        .pipe(gulp.dest('lmj/views'));
 });
 
 gulp.task('scripts', function() {
-    gulp.src('public/javascripts/*.js')
+    gulp.src('public/javascripts/bak/*.js')
         .pipe(uglify())
-        .pipe(gulp.dest('dist/public/javascripts'));
+        .pipe(gulp.dest('lmj/public/javascripts'));
 });

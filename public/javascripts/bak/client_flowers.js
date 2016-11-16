@@ -1,7 +1,7 @@
 /**
 * client API
 * @Auther: zgwang
-* @Date: 2016.11.3
+* @Date: 2016.11.16
 */
 
 // var io = require('socket.io-client');
@@ -23,7 +23,7 @@ client['readWishBySetPhone'] = readWishBySetPhone;
 // connect method
 function connect(callback){ 
 	// ip and port, you should change the ip address by yourself.
-	socket = io.connect("http://10.107.31.156:8123/flower"); 
+	socket = io.connect("http://10.107.31.156:8128/flower"); 
 	
 	socket.on('connection',function(){
 		callback.connectCallback();
@@ -99,12 +99,13 @@ function readWish(phone, flowerShop, callback){
 /**
 * This function is used to read a wish by setPhone.
 */
-function readWishBySetPhone(setPhone, flowerShop, callback){
+function readWishBySetPhone(setPhone, phone, flowerShop, callback){
 	connect(callback);
 
 	var obj = {};
 	obj.setPhone = setPhone;
 	obj.flowerShop = flowerShop;
+	obj.phone = phone;
 	socket.emit("readWishBySetPhone", obj);
 
 	socket.on('readWishBySetPhoneSucceed', function(object){
